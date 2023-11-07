@@ -1,21 +1,19 @@
-'use client';
 
 
 
-export default function Post(title:string, content:string) {
+export const PostElement = ({title, content, created_at,key}: {title:string, content:string,created_at:string,key:string}) => {
     return (
-        <main>
+        <div id="postChild">
             <div>
-                 {title}
+                {title}
             </div>
             <div>
-                 {content}
+                {content}
             </div>
             <div>
-                Date&time
+                {created_at}
             </div>
             <button>Edit</button>
-        </main>
+        </div>
     )
-}
-
+};

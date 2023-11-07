@@ -26,9 +26,13 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-
+#Buttons {
+  
+}
 button {
   background-color: aqua;
+  margin-right: 5px;
+  color: black;
 }
 
 #postChild {

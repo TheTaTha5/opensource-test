@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import { IPosts,IPost } from "../interfaces/interface";
+import { PostElement } from "./posts";
 
 
 
@@ -18,22 +19,7 @@ const DisplayPosts = () => {
         fetchData();
     }, [])
 
-     const PostElement = ({title, content, created_at,key}: {title:string, content:string,created_at:string,key:string}) => {
-        return (
-            <div id="postChild">
-                <div>
-                    {title}
-                </div>
-                <div>
-                    {content}
-                </div>
-                <div>
-                    {created_at}
-                </div>
-                <button>Edit</button>
-            </div>
-        )
-    };
+
     return (
         <div>
             {postsData?.posts.map((post)=> {

@@ -1,11 +1,10 @@
+import Link from "next/link";
 import DisplayPosts from "./posts/postFetcher";
 
 export default async function Home() {
   return (
     <main>
-      <button>
-        Create/Draft
-      </button>
+      <Link href={'/draft/'}>Draft</Link>
       <div>
         Display publish post
         <div>
