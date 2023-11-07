@@ -1,19 +1,21 @@
-import Post from './posts/page';
-import postFetcher from './posts/postFetcher';
-
+import DisplayPosts from "./posts/postFetcher";
 
 export default async function Home() {
   return (
     <main>
       <button>
-        Create Draft
+        Create/Draft
       </button>
       <div>
         Display publish post
+        <div>
+        <DisplayPosts/>
+        </div>
+        <div>
+        </div>
+        <div>
+        </div>
       </div>
-      <Post/>
-      
-
     </main>
   )
 }

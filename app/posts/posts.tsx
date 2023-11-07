@@ -1,20 +1,20 @@
 'use client';
-import postFetcher from "./postFetcher"
 
 
-export default function Post() {
+
+export default function Post(title:string, content:string) {
     return (
         <main>
             <div>
-                 title
+                 {title}
             </div>
             <div>
-                 content
+                 {content}
             </div>
             <div>
                 Date&time
             </div>
-            <button onClick={( )=> postFetcher()}>Edit</button>
+            <button>Edit</button>
         </main>
     )
 }
