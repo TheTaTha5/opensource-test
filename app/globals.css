@@ -26,8 +26,8 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-#Buttons {
-  
+input {
+  color: rgb(122, 50, 50)
 }
 button {
   background-color: aqua;
