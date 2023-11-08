@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import { IPosts,IPost } from "../interfaces/interface";
-import { PostElement } from "../posts/posts";
+import { PostElement } from "../posts/postElements";
 import { DraftElement } from "./draftPage";
 
 

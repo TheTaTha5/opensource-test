@@ -4,10 +4,11 @@ import DisplayDrafts from "./draftFetcher";
 export default function Home() {
     return (
       <div>
-        <Link href={'/'}>Post</Link>
+        <Link href={'/'}>PostPage</Link>
         <button><Link href="/draft/draftForm">Create New Draft</Link></button>
-        <div>
-          Display Draft posts
+        <h1>
+          Draft posts
+          </h1>
           <div>
             <DisplayDrafts/>
           </div>
@@ -15,7 +16,7 @@ export default function Home() {
           </div>
           <div>
           </div>
-        </div>
+        
       </div>
     )
   }

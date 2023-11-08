@@ -29,6 +29,10 @@ body {
 input {
   color: rgb(122, 50, 50)
 }
+
+textarea {
+  color: black;
+}
 button {
   background-color: aqua;
   margin-right: 5px;

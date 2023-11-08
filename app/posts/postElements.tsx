@@ -1,3 +1,5 @@
+import Link from "next/link";
+import editPost from "./edit";
 
 
 
@@ -13,7 +15,7 @@ export const PostElement = ({title, content, created_at,key}: {title:string, con
             <div>
                 {created_at}
             </div>
-            <button>Edit</button>
+           <Link href="/draft/draftForm"><button onClick={() => editPost({ id: key })}>Edit</button></Link>
         </div>
     )
 };

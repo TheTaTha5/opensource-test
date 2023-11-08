@@ -16,8 +16,8 @@ interface postState  {
 
 const initialState:initialState = {
     value: {
-        title:"test1",
-        content:"test1",
+        title:"",
+        content:"",
         published:false,
         id:"",
         created_at:"",
@@ -37,11 +37,19 @@ export const postSlice = createSlice({
         voidAll : (state) => {
             state.value.title = "";
             state.value.content = "";
+        },
+        submitPublish : (state) => {
+            state.value.published = true;
+            voidAll();
+        },
+        submitDraft : (state) => {
+            state.value.published = false;
+            voidAll();
         }
         },
 
     }
 )
 export const postSelector = (state:RootState) => state.postSliceReducer;
-export const {setTitle,setContent} = postSlice.actions;
+export const {setTitle,setContent,voidAll,submitDraft,submitPublish} = postSlice.actions;
 export default postSlice.reducer;
