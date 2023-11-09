@@ -46,7 +46,7 @@ const DraftForm = () => {
     })
   };
   return (
-    <div>
+    <div className="Form">
       <form onSubmit={(e) => handleSubmit(e)}>
         <label>Title</label>
         <input
@@ -56,18 +56,17 @@ const DraftForm = () => {
           value={postReducer.value.title}
           onChange={(e) => dispatch(setTitle(e.target.value))}
         />
-        <label>content</label>
+        <label>Content</label>
         <textarea
           id="content"
           name="content"
+          rows={20}
           value={postReducer.value.content}
           onChange={(e) => dispatch(setContent(e.target.value))}
         />
-        <button onClick={()=>{(dispatch(submitDraft()),router.push("/draft"),voidAll())}}><input type="submit" value="Save" /></button>
-        <button onClick={()=>{(dispatch(isPublished()),router.push("/"))}}><input type="submit" value="Publish now"/></button>
-        <div>
-          <button onClick={()=> (dispatch(voidAll()),router.back())}>Cancle</button>
-        </div>
+        <button className="saveButton" onClick={()=>{(dispatch(submitDraft()),router.push("/draft"),voidAll())}}><input type="submit" value="Save" /></button>
+        <button className="publishButton"onClick={()=>{(dispatch(isPublished()),router.push("/"))}}><input type="submit" value="Publish now"/></button>
+        <button className="cancleButton" onClick={()=> (dispatch(voidAll()),router.back())}>Cancle</button>
       </form>
     </div>
   );

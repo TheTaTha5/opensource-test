@@ -25,10 +25,10 @@ export const DraftElement = ({
       <div id="created_at">{created_at}</div>
       <div className="Buttons">
         <Link href="/draft/draftForm"><button className="editButton" onClick={() => editPost({ id: key })}>Edit</button></Link>
-        <button id={key} onClick={() => publishDraft({ id: key })}>
+        <button className="publishButton" id={key} onClick={() => publishDraft({ id: key })}>
           Publish
         </button>
-        <Link href="/draft"><button onClick={() => (deletePost({ id: key }))}>
+        <Link href="/draft"><button className="deleteButton" onClick={() => (deletePost({ id: key }))}>
           Delete
         </button></Link>
       </div>

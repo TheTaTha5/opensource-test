@@ -4,12 +4,13 @@ import DisplayDrafts from "./draftFetcher";
 export default function Home() {
     return (
       <div>
-        <Link href={'/'}>PostPage</Link>
-        <button className="CreateButton"><Link href="/draft/draftForm">Create New Draft</Link></button>
+        <Link href={'/'}>DraftMode</Link>
+        <Link href="/draft/draftForm"><button className="CreateButton">Create New Draft</button></Link>
         <h1>
           Draft posts
           </h1>
-          <div>
+          
+          <div className="OutDisplay">
             <DisplayDrafts/>
           </div>
           <div>

@@ -5,12 +5,12 @@ import DisplayPosts from "./posts/postFetcher";
 export default async function Home() {
   return (
     <main>
-      <Link href={'/draft/'}>Draft</Link>
-      <button className="CreateButton"><Link href="/draft/draftForm">Create New Draft</Link></button>
+      <Link href={'/draft/'}>PostMode</Link>
+      <Link href="/draft/draftForm"><button className="CreateButton">Create New Draft</button></Link>
       <h1>
-        Display publish post
+        Published posts
         </h1>
-        <div>
+        <div className="OutDisplay">
         <DisplayPosts/>
         </div>
         <div>
