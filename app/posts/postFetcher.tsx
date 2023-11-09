@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { IPosts,IPost } from "../interfaces/interface";
 import { PostElement } from "./postElements";
-import { useRouter } from "next/navigation";
+
 
 
 

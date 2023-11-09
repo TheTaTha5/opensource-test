@@ -48,10 +48,14 @@ textarea {
   margin-right: 7rem;
 }
 .Buttons {
+  margin-left: auto; 
+  margin-right: 0;
+  width: 30%;
   display: flex;
   flex-direction: row;
   margin-top: 1rem;
-  justify-content: end;
+  justify-content: space-between;
+  
 }
 .CreateButton {
   position: absolute;right:0;top:0;
@@ -103,7 +107,7 @@ textarea {
   background-color: rgb(23, 221, 56);
   color: rgb(255, 255, 255);
   padding: 7px 14px;
-  
+  border-radius: 8px;
 }
 .deleteButton {
   justify-content: right;

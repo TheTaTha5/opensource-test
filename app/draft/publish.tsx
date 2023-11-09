@@ -1,19 +1,22 @@
 
 
 export const publishDraft = async ({id} : {id:string}) => {
+    const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+    const raw = 
+    JSON.stringify({
+      "published": true,
+    });
+    const requestOptions = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+      };
+ const res = await fetch(`https://post-api.opensource-technology.com/api/posts/${id}`, requestOptions).then((result)=> {
+    console.log(id);
+    console.log("patch publish to true === " + result.json())
+ });
 
- const res = await fetch(`https://post-api.opensource-technology.com/api/posts/${id}`, {
-    method: "PATCH",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        "published": true
-    })
- })
- if(res.status) {
-    console.log(res.status)
- }
 };
     
 
