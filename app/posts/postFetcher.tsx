@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 
 
 const postFetcher = () => {
-    const router = useRouter();
     const [postsData,setPostsdata] = useState<IPosts>()
     const fetchData = async () => {
         const res = await fetch('https://post-api.opensource-technology.com/api/posts?limit=20')
