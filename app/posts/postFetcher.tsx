@@ -6,7 +6,7 @@ import { PostElement } from "./postElements";
 
 
 
-const postFetcher = () => {
+const PostFetcher = () => {
     const [postsData,setPostsdata] = useState<IPosts>()
     const fetchData = async () => {
         const res = await fetch('https://post-api.opensource-technology.com/api/posts?limit=20')
@@ -33,4 +33,4 @@ const postFetcher = () => {
 }
 
 
-export default postFetcher;
+export default PostFetcher;
