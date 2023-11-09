@@ -1,6 +1,7 @@
 "use client";
 
-import { postSelector, setContent, submitDraft, submitPublish, setTitle, voidAll } from "@/app/redux/feature/postSlices";
+import { IPost } from "@/app/interfaces/interface";
+import { postSelector, setContent, submitDraft, submitPublish, setTitle, voidAll, setID, isPublished } from "@/app/redux/feature/postSlices";
 import { AppDispatch, store } from "@/app/redux/store";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -11,19 +12,17 @@ const DraftForm = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const postReducer = useSelector(postSelector);
-
-  // const [title, setTitle] = useState<string>("");
-  // const [content, setContent] = useState<string>("");
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    
     e.preventDefault();
     const raw = 
     JSON.stringify({
       title: postReducer.value.title.toString(),
       content: postReducer.value.content.toString(),
-      published: postReducer.value.published.toString(),
+      // published: postReducer.value.published.toString(),
     });
     console.log("raw log = "+ raw);
     const requestOptions = {
@@ -35,13 +34,16 @@ const DraftForm = () => {
     const res = await fetch(
       "https://post-api.opensource-technology.com/api/posts",
       requestOptions
-    );
-    if (res.status == 200) {
-      console.log("router called");
-      console.log(res.body);
-    } else {
+    ).then(function(res)
+    { 
       console.log(res.status)
-    }
+      return res.json();
+    }).then((resString:IPost) => {
+      dispatch(setID(resString.id));
+      if(postReducer.value.published === true) {
+        dispatch(submitPublish());
+      }
+    })
   };
   return (
     <div>
@@ -61,10 +63,10 @@ const DraftForm = () => {
           value={postReducer.value.content}
           onChange={(e) => dispatch(setContent(e.target.value))}
         />
-        <button onClick={()=>{dispatch(submitDraft())}}><input type="submit" value="Save" /></button>
-        <button onClick={()=>{(dispatch(submitPublish()),router.replace('/'))}}><input type="submit" value="Publish Now"  /></button>
+        <button onClick={()=>{(dispatch(submitDraft()),router.push("/draft"),voidAll())}}><input type="submit" value="Save" /></button>
+        <button onClick={()=>{(dispatch(isPublished()),router.push("/"))}}><input type="submit" value="Publish now"/></button>
         <div>
-          <Link href="/draft"><button onClick={()=> dispatch(voidAll())}>Cancle</button></Link>
+          <button onClick={()=> (dispatch(voidAll()),router.back())}>Cancle</button>
         </div>
       </form>
     </div>

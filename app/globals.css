@@ -26,6 +26,12 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+h1 {
+  display: block;
+  text-align: center;
+  
+}
+
 input {
   color: rgb(122, 50, 50)
 }
@@ -33,13 +39,31 @@ input {
 textarea {
   color: black;
 }
-button {
-  background-color: aqua;
+.CreateButton {
+  background-color: rgb(2, 43, 77);
   margin-right: 5px;
-  color: black;
+  color: rgb(255, 255, 255);
+  padding: 15px 32px;
+  border-radius: 8px;
+  
 }
-
-#postChild {
+.CreateButton:hover {
+  background-color: rgb(3, 82, 146);
+  margin-right: 5px;
+  color: rgb(255, 255, 255);
+  padding: 15px 32px;
+  border-radius: 8px;
+  
+}
+.editButton {
+  justify-content: left;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  padding: 71px 14px;
+  border-radius: 8px;
+}
+#cardElement {
+  display: block;
   border-color: red;
   background-color: gray;
   margin-top: 25px

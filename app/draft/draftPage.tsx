@@ -4,9 +4,6 @@ import { echoClick, publishDraft } from "./publish";
 import deletePost from "../posts/delete";
 import { useRouter } from "next/navigation";
 import editPost from "../posts/edit";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../redux/store";
-import { setContent, setTitle } from "../redux/feature/postSlices";
 
 
 export const DraftElement = ({
@@ -22,12 +19,12 @@ export const DraftElement = ({
 }) => {
 
   return (
-    <div id="postChild">
-      <div>{title}</div>
-      <div>{content}</div>
-      <div>{created_at}</div>
+    <div id="cardElement">
+      <div id="title">{title}</div>
+      <div id="content">{content}</div>
+      <div id="created_at">{created_at}</div>
       <div className="Buttons">
-        <Link href="/draft/draftForm"><button onClick={() => editPost({ id: key })}>Edit</button></Link>
+        <Link href="/draft/draftForm"><button className="editButton" onClick={() => editPost({ id: key })}>Edit</button></Link>
         <button id={key} onClick={() => publishDraft({ id: key })}>
           Publish
         </button>

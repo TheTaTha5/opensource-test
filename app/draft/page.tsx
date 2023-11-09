@@ -5,7 +5,7 @@ export default function Home() {
     return (
       <div>
         <Link href={'/'}>PostPage</Link>
-        <button><Link href="/draft/draftForm">Create New Draft</Link></button>
+        <button className="CreateButton"><Link href="/draft/draftForm">Create New Draft</Link></button>
         <h1>
           Draft posts
           </h1>

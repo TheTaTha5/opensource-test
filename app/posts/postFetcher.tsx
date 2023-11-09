@@ -2,10 +2,12 @@
 import { useEffect, useState } from "react";
 import { IPosts,IPost } from "../interfaces/interface";
 import { PostElement } from "./postElements";
+import { useRouter } from "next/navigation";
 
 
 
-const DisplayPosts = () => {
+const postFetcher = () => {
+    const router = useRouter();
     const [postsData,setPostsdata] = useState<IPosts>()
     const fetchData = async () => {
         const res = await fetch('https://post-api.opensource-technology.com/api/posts?limit=20')
@@ -16,9 +18,10 @@ const DisplayPosts = () => {
         setPostsdata(await res.json())
     }
     useEffect(() => {
-        fetchData();
+        setTimeout(fetchData,200)
+        ;
     }, [])
-
+    
 
     return (
         <div>
@@ -31,4 +34,4 @@ const DisplayPosts = () => {
 }
 
 
-export default DisplayPosts;
+export default postFetcher;

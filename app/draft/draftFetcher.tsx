@@ -17,7 +17,7 @@ const DisplayDrafts = () => {
         setdraftdata(await res.json())
     }
     useEffect(() => {
-        fetchData();
+        setTimeout(fetchData,200)
     }, [])
 
      
