@@ -1,6 +1,6 @@
 import Link from "next/link";
 import DisplayPosts from "./posts/postFetcher";
-export default async function Home() {
+export default function Home() {
   return (
     <main>
       <Link href={'/draft/'}>PostMode</Link>

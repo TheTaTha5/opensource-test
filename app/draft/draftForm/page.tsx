@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchingError } from "@/app/errorHander/exceptions";
 import { IPost } from "@/app/interfaces/interface";
 import { postSelector, setContent, submitDraft, submitPublish, setTitle, voidAll, setID, isPublished } from "@/app/redux/feature/postSlices";
 import { AppDispatch, store } from "@/app/redux/store";
@@ -36,7 +37,10 @@ const DraftForm = () => {
       requestOptions
     ).then(function(res)
     { 
-      console.log(res.status)
+      console.log("fetch post status = " + res.status)
+      if(res.status > 201) {
+        throw new fetchingError();
+      }
       return res.json();
     }).then((resString:IPost) => {
       dispatch(setID(resString.id));
@@ -64,9 +68,9 @@ const DraftForm = () => {
           value={postReducer.value.content}
           onChange={(e) => dispatch(setContent(e.target.value))}
         />
-        <button type="submit"className="formButtonSet" id="saveButton" onClick={()=>{(dispatch(submitDraft()),router.push("/draft"),voidAll())}}>Save</button>
+        <button type="submit"className="formButtonSet" id="saveButton" onClick={()=>{(dispatch(submitDraft()),router.push("/draft"),dispatch(voidAll()))}}>Save</button>
         <button type="submit" className="formButtonSet" id="publishButton"onClick={()=>{(dispatch(isPublished()),router.push("/"))}}>Publish now</button>
-        <button type="submit" className="formButtonSet" id="cancleButton" onClick={()=> (dispatch(voidAll()),router.back())}>Cancle</button>
+        <button className="formButtonSet" id="cancleButton" type="button" onClick={()=> (dispatch(voidAll()),router.replace("/"))}>Cancle</button>
       </form>
     </div>
   );

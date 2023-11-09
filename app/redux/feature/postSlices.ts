@@ -2,6 +2,7 @@ import { IPost } from "@/app/interfaces/interface";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { redirect, useRouter } from "next/navigation";
+import { fetchingError } from "@/app/errorHander/exceptions";
 
 interface initialState  {
     value: postState
@@ -46,7 +47,7 @@ export const postSlice = createSlice({
         },
         submitDraft : (state) => {
             state.value.published = false;
-
+            voidAll();
         },
         isPublished : (state) => {
             state.value.published = true;
@@ -70,7 +71,7 @@ export const postSlice = createSlice({
                 console.log("publish post now = " + res.body);
                 if(res.status==201||200) {
                 } else {
-                    console.log("not ok")
+                    throw new fetchingError()
                 }
             });
             voidAll();
