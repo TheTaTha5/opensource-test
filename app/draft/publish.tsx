@@ -14,7 +14,7 @@ export const publishDraft = async ({id} : {id:string}) => {
       };
  const res = await fetch(`https://post-api.opensource-technology.com/api/posts/${id}`, requestOptions).then((result)=> {
     console.log(id);
-    console.log("patch publish to true === " + result.json())
+    console.log("patch publish to true === ")
  });
 
 };

@@ -64,9 +64,9 @@ const DraftForm = () => {
           value={postReducer.value.content}
           onChange={(e) => dispatch(setContent(e.target.value))}
         />
-        <button className="saveButton" onClick={()=>{(dispatch(submitDraft()),router.push("/draft"),voidAll())}}><input type="submit" value="Save" /></button>
-        <button className="publishButton"onClick={()=>{(dispatch(isPublished()),router.push("/"))}}><input type="submit" value="Publish now"/></button>
-        <button className="cancleButton" onClick={()=> (dispatch(voidAll()),router.back())}>Cancle</button>
+        <button type="submit"className="formButtonSet" id="saveButton" onClick={()=>{(dispatch(submitDraft()),router.push("/draft"),voidAll())}}>Save</button>
+        <button type="submit" className="formButtonSet" id="publishButton"onClick={()=>{(dispatch(isPublished()),router.push("/"))}}>Publish now</button>
+        <button type="submit" className="formButtonSet" id="cancleButton" onClick={()=> (dispatch(voidAll()),router.back())}>Cancle</button>
       </form>
     </div>
   );

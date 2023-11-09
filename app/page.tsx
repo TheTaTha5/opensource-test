@@ -1,7 +1,5 @@
 import Link from "next/link";
 import DisplayPosts from "./posts/postFetcher";
-
-
 export default async function Home() {
   return (
     <main>

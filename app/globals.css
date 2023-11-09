@@ -55,10 +55,11 @@ textarea {
   flex-direction: row;
   margin-top: 1rem;
   justify-content: space-between;
+  flex-flow: row;
   
 }
 .CreateButton {
-  position: absolute;right:0;top:0;
+  position: fixed;right:0;top:0;
   background-color: rgb(2, 43, 77);
   margin-right: 5px;
   color: rgb(255, 255, 255);
@@ -66,7 +67,7 @@ textarea {
   border-radius: 8px;
 }
 .CreateButton:hover {
-  position: absolute;right:0;top:0;
+  position: fixed;right:0;top:0;
   background-color: rgb(3, 82, 146);
   margin-right: 5px;
   color: rgb(255, 255, 255);
@@ -88,18 +89,25 @@ textarea {
   padding: 7px 14px;
   border-radius: 8px;
 }
-.saveButton {
+#saveButton {
   background-color: rgb(190, 202, 20);
   color: rgb(255, 255, 255);
   padding: 7px 14px;
   
 }
-.cancleButton {
+#cancleButton {
   text-align: center;
   background-color: rgb(64, 65, 64);
   color: rgb(255, 255, 255);
   padding: 7px 14px;
   
+}
+
+#publishButton {
+  justify-content: right;
+  background-color: rgb(23, 221, 56);
+  color: rgb(255, 255, 255);
+  padding: 7px 14px;
 }
 
 .publishButton {
@@ -126,7 +134,10 @@ textarea {
   margin-top: 25px;
   border-radius: 4px;
 }
-
+.formButtonSet {
+  text-align: center;
+  vertical-align: middle;
+}
 form {
   margin-left: 5rem;
   margin-right: 5rem;
@@ -146,7 +157,8 @@ label {
 }
 
 #cardElement {
-  display: flexbox;
+  overflow:hidden;
+  display: block;
   padding-left: 2rem;
   padding-right: 2rem;
   padding-bottom: 2rem;

@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { useDispatch } from 'react-redux';
 import postSliceReducer from './feature/postSlices'
+
 // ...
 
 export const store = configureStore({
   reducer: {
-    postSliceReducer
+    postSliceReducer,
+
   },
 })
 

@@ -13,6 +13,7 @@ interface postState  {
         published:boolean,
         id:string,
         created_at:string,
+        term:string
 }
 
 const initialState:initialState = {
@@ -22,6 +23,7 @@ const initialState:initialState = {
         published:false,
         id:"",
         created_at:"",
+        term:""
     }
 }
 
@@ -44,6 +46,7 @@ export const postSlice = createSlice({
         },
         submitDraft : (state) => {
             state.value.published = false;
+
         },
         isPublished : (state) => {
             state.value.published = true;
@@ -72,10 +75,13 @@ export const postSlice = createSlice({
             });
             voidAll();
         },
+        setTerm : (state,action:PayloadAction<string>) => {
+            state.value.term = action.payload;
+        }
         },
 
     }
 )
 export const postSelector = (state:RootState) => state.postSliceReducer;
-export const {setTitle,setContent,voidAll,submitDraft,submitPublish,setID,isPublished} = postSlice.actions;
+export const {setTitle,setContent,voidAll,submitDraft,submitPublish,setID,isPublished,setTerm} = postSlice.actions;
 export default postSlice.reducer;
