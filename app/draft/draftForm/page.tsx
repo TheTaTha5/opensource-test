@@ -2,9 +2,17 @@
 
 import { fetchingError } from "@/app/errorHander/exceptions";
 import { IPost } from "@/app/interfaces/interface";
-import { postSelector, setContent, submitDraft, submitPublish, setTitle, voidAll, setID, isPublished } from "@/app/redux/feature/postSlices";
+import {
+  postSelector,
+  setContent,
+  submitDraft,
+  submitPublish,
+  setTitle,
+  voidAll,
+  setID,
+  isPublished,
+} from "@/app/redux/feature/postSlices";
 import { AppDispatch, store } from "@/app/redux/store";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,15 +25,13 @@ const DraftForm = () => {
   myHeaders.append("Content-Type", "application/json");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    
     e.preventDefault();
-    const raw = 
-    JSON.stringify({
+    const raw = JSON.stringify({
       title: postReducer.value.title.toString(),
       content: postReducer.value.content.toString(),
-      // published: postReducer.value.published.toString(),
+      published: postReducer.value.published.toString(),
     });
-    console.log("raw log = "+ raw);
+    console.log("raw log = " + raw);
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -35,19 +41,20 @@ const DraftForm = () => {
     const res = await fetch(
       "https://post-api.opensource-technology.com/api/posts",
       requestOptions
-    ).then(function(res)
-    { 
-      console.log("fetch post status = " + res.status)
-      if(res.status > 201) {
-        throw new fetchingError();
-      }
-      return res.json();
-    }).then((resString:IPost) => {
-      dispatch(setID(resString.id));
-      if(postReducer.value.published === true) {
-        dispatch(submitPublish());
-      }
-    })
+    )
+      .then(function (res) {
+        console.log("fetch post status = " + res.status);
+        if (res.status > 201) {
+          throw new fetchingError();
+        }
+        return res.json();
+      })
+      .then((resString: IPost) => {
+        dispatch(setID(resString.id));
+        if (postReducer.value.published === true) {
+          dispatch(submitPublish());
+        }
+      });
   };
   return (
     <div className="Form">
@@ -68,9 +75,38 @@ const DraftForm = () => {
           value={postReducer.value.content}
           onChange={(e) => dispatch(setContent(e.target.value))}
         />
-        <button type="submit"className="formButtonSet" id="saveButton" onClick={()=>{(dispatch(submitDraft()),router.push("/draft"),dispatch(voidAll()))}}>Save</button>
-        <button type="submit" className="formButtonSet" id="publishButton"onClick={()=>{(dispatch(isPublished()),router.push("/"))}}>Publish now</button>
-        <button className="formButtonSet" id="cancleButton" type="button" onClick={()=> (dispatch(voidAll()),router.replace("/"))}>Cancle</button>
+        <div>
+          <button
+            type="submit"
+            className="formButtonSet"
+            id="saveButton"
+            onClick={() => {
+              dispatch(submitDraft()),
+                router.push("/draft")
+            }}
+          >
+            Save
+          </button>
+          <button
+            className="formButtonSet"
+            id="cancleButton"
+            type="button"
+            onClick={() => (dispatch(voidAll()), router.replace("/"))}
+          >
+            Cancle
+          </button>
+        </div>
+
+        <button
+          type="submit"
+          className="formButtonSet"
+          id="publishButton"
+          onClick={() => {
+            dispatch(isPublished()), router.push("/");
+          }}
+        >
+          Publish now
+        </button>
       </form>
     </div>
   );
