@@ -20,7 +20,7 @@ export const postPost = async ({title,content}: {title:string,content:string}) =
         const t = store.dispatch(setID(res.id));
         console.log("id setted  " + store.getState().postSliceReducer.value.id);
         console.log("post ok == "+ result.ok)
-        store.dispatch(voidAll());
-        return result;
+
+        return res.id;
     
 }

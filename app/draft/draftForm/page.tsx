@@ -33,30 +33,27 @@ const DraftForm = () => {
 
     switch (postReducer.value.published) {
       case true:
-      await postPost({content:postReducer.value.content,title:postReducer.value.title}).then(async (res)=> { //set ID state
-        if(res.ok) {
-          console.log(res.body);
-          console.log("start patch");
-          await patchPost({content:postReducer.value.content, title:postReducer.value.title, id:store.getState().postSliceReducer.value.id, pub:true}).then(async (res) => {
-           if(!res.ok) {
-            throw new fetchingError();
-           }
-          })
+      await postPost({content:postReducer.value.content,title:postReducer.value.title}).then(async (res)=> {
+        console.log(res);
+        console.log("start patch");
+        await patchPost({content:postReducer.value.content, title:postReducer.value.title, id:postReducer.value.id, pub:true}).then((res)=> {
+          console.log("patching")
           router.push("/");
-        } else {
-          console.log("post result is == " + res.ok)
-        }
-      });
+          store.dispatch(voidAll());
+          })
+      }) //set ID state
+          
         break;
+
       case false:
         console.log("false publish case => post reducer publish == " + postReducer.value.published);
         await postPost({content:postReducer.value.content,title:postReducer.value.title}).then((res)=> {
-          console.log("resok == " +res.ok);
-          if(res.ok) {
+          // console.log("resok == " +res.ok);
+          if(res) {
             dispatch(voidAll());
-            router.push("/draft");
           }
         })
+        router.push("/draft")
         break;
     }
   };
@@ -85,7 +82,7 @@ const DraftForm = () => {
             className="formButtonSet"
             id="saveButton"
             onClick={() => {
-              dispatch(submitDraft(),);
+              (dispatch(submitDraft()),router.push("/draft"));
             }}
           >
             Save

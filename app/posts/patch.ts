@@ -1,10 +1,10 @@
-import { submitDraft } from "../redux/feature/postSlices";
+import { submitDraft, voidAll } from "../redux/feature/postSlices";
 import { store } from "../redux/store";
 
 export const patchPost = async ({id,title,content,pub}: {id:string,title:string,content:string,pub:boolean}) => {
     // let patchFinish = false;
-    console.log("patching " + id)
-    const result = await fetch(`https://post-api.opensource-technology.com/api/posts/${id}`, {
+    console.log("patching => " + store.getState().postSliceReducer.value.id)
+    const result = await fetch(`https://post-api.opensource-technology.com/api/posts/${store.getState().postSliceReducer.value.id}`, {
         method : 'PATCH',
         headers : {"Content-Type" : "application/json"},
         body: JSON.stringify({
@@ -20,5 +20,6 @@ export const patchPost = async ({id,title,content,pub}: {id:string,title:string,
     //     patchFinish = true;
     // }
     console.log("patch ok =="+result.ok);
+
     return result;
 }
