@@ -22,12 +22,7 @@ export const DraftElement = ({
   const router = useRouter();
   const datation = new Date(created_at);
   const ftedDate = [datation.getDate(),"-",datation.getMonth()+1,"-",datation.getFullYear()," ",datation.getHours(),":",datation.getMinutes()].join("");
-  const deleteFunc = async ({id}: {id:string}) => {
-    await deletePost({id:id}).then((res) => {
-        window.location.reload();
-        router.push("/draft");
-    })
-  }
+
   return (
     <div id="cardElement">
       <div id="title">{title}</div>
@@ -38,7 +33,7 @@ export const DraftElement = ({
         <button className="publishButton" id={key} onClick={() => publishDraft({ id: key })}>
           Publish
         </button>
-        <button className="deleteButton" onClick={() => (deleteFunc({id:key}),window.location.reload())}>
+        <button type="button" className="deleteButton" onClick={() => (deletePost({id:key}))}>
           Delete
         </button>
       </div>
