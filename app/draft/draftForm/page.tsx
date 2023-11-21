@@ -37,16 +37,16 @@ const DraftForm = () => {
         if(res.ok) {
           console.log(res.body);
           console.log("start patch");
-          console.log("patching post id == " + postReducer.value.id);
-          await patchPost({content:postReducer.value.content, title:postReducer.value.title, id:postReducer.value.id}).then(async (res) => {
-           if(res === true) {
-            deletePost({id:postReducer.value.id});
+          // console.log("patching post id == " + store.getState().postSliceReducer.value.id);
+          await patchPost({content:postReducer.value.content, title:postReducer.value.title, id:store.getState().postSliceReducer.value.id}).then(async (res) => {
+           if(res.ok) {
+            // await deletePost({id:postReducer.value.id});
            } else {
             throw new fetchingError();
            }
           })
         } else {
-          console.log("result is == " + res.ok)
+          console.log("post result is == " + res.ok)
         }
       });
         break;

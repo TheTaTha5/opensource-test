@@ -39,6 +39,7 @@ export const postSlice = createSlice({
         },
         setID : (state,action:PayloadAction<string>) => {
             state.value.id = action.payload;
+            console.log("ID settedi in slice == " + action.payload)
         },
         voidAll : (state) => {
             state.value.title = "";
