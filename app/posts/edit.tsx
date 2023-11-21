@@ -2,20 +2,21 @@
 import { useDispatch } from "react-redux";
 import DraftForm from "../draft/draftForm/page";
 import { IPost } from "../interfaces/interface";
-import { setContent, setTitle } from "../redux/feature/postSlices";
+import { setContent, setTitle, setID } from "../redux/feature/postSlices";
 import { AppDispatch, store } from "../redux/store";
+import EditForm from "./editForm/page";
 
 
- const editPost = async ({id}: {id:string}) => {
-    console.log("EditPost called");
+ const setFormState = async ({id}: {id:string}) => {
     const res = await fetch(`https://post-api.opensource-technology.com/api/posts/${id}`)
     const post:IPost = await res.json();
     store.dispatch(setTitle(post.title));
     store.dispatch(setContent(post.content));
+    store.dispatch(setID(post.id));
     return (
         <div>
-            <DraftForm/>
+            <EditForm/>
         </div>
     )
 }
-export default editPost;
+export default setFormState;

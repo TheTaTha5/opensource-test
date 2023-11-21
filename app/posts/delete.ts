@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+
 import { fetchingError } from "../errorHander/exceptions";
 
  const deletePost = async ({id}:{id:string}) => {
@@ -6,13 +6,14 @@ import { fetchingError } from "../errorHander/exceptions";
     const res = await fetch(`https://post-api.opensource-technology.com/api/posts/${id}`,{
         method:"DELETE"
     })
-    if(res.status == 200) {
-        console.log("Post Deleted")
-        
+    if(!res.ok) {
+        deletePost({id:id});
+       
+
     } else {
-        throw new fetchingError();
+        console.log("Post ok = " + res.status);
     }
-    location.reload();
+    return res;
 }
 
 export default deletePost;

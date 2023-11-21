@@ -15,12 +15,9 @@ import { AppDispatch, store } from "@/app/redux/store";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { publishDraft } from "../publish";
-import deletePost from "@/app/posts/delete";
-import { patchPost } from "@/app/posts/patch";
-import { postPost } from "@/app/posts/post";
+import deletePost from "../delete";
 
-const DraftForm = () => {
+const EditForm = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const postReducer = useSelector(postSelector);
@@ -29,48 +26,42 @@ const DraftForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(postReducer.value.published);
+    const raw = JSON.stringify({
+      title: postReducer.value.title.toString(),
+      content: postReducer.value.content.toString(),
+      published: postReducer.value.published.toString(),
+    });
+    console.log("raw log = " + raw);
+    
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+    };
 
-    switch (postReducer.value.published) {
-      case true:
-      await postPost({content:postReducer.value.content,title:postReducer.value.title}).then(async (res)=> { //set ID state
-        if(res.ok) {
-          console.log(res.body);
-          console.log("start patch");
-          console.log("patching post id == " + postReducer.value.id);
-          await patchPost({content:postReducer.value.content, title:postReducer.value.title, id:postReducer.value.id}).then(async (res) => {
-           if(res === true) {
-            deletePost({id:postReducer.value.id});
-           } else {
-            throw new fetchingError();
-           }
-          })
+    const res = await fetch(
+      "https://post-api.opensource-technology.com/api/posts",
+      requestOptions
+    )
+      .then(function (res) {
+        
+        console.log("fetch post status = " + res.status);
+        if (!res.ok) {
+          router.push("/draft/draftForm");
+          console.log(res.status)
+
+          throw new fetchingError();
         } else {
-          console.log("result is == " + res.ok)
+          dispatch(voidAll());
+        }
+        return res.json();
+      })
+      .then((resString: IPost) => {
+        dispatch(setID(resString.id));
+        if (postReducer.value.published === true) {
+        
         }
       });
-        break;
-      case false:
-        const postDraft = fetch(
-          "https://post-api.opensource-technology.com/api/posts/",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              title: postReducer.value.title,
-              content: postReducer.value.content,
-            }),
-          }
-        ).then(async (res) => {
-          console.log(
-            "SubmitPublishFunctionCalled status === " + res.status + res.body
-          );
-          if (!res.ok) {
-            throw new fetchingError();
-          }
-        });
-        break;
-    }
   };
   return (
     <div className="Form">
@@ -91,13 +82,13 @@ const DraftForm = () => {
           value={postReducer.value.content}
           onChange={(e) => dispatch(setContent(e.target.value))}
         />
-        <div>
           <button
             type="submit"
             className="formButtonSet"
             id="saveButton"
             onClick={() => {
-              dispatch(submitDraft(),), router.push("/draft");
+              dispatch(submitDraft()),
+                router.back();
             }}
           >
             Save
@@ -110,21 +101,19 @@ const DraftForm = () => {
           >
             Cancle
           </button>
-        </div>
-
         <button
-          type="submit"
           className="formButtonSet"
           id="publishButton"
           onClick={() => {
-            dispatch(isPublished());
+            (deletePost({id:postReducer.value.id}),
+            router.back())
           }}
         >
-          Publish now
+          Delete
         </button>
       </form>
     </div>
   );
 };
 
-export default DraftForm;
+export default EditForm;

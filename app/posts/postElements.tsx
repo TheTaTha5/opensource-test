@@ -1,5 +1,7 @@
 import Link from "next/link";
 import editPost from "./edit";
+import setFormState from "./edit";
+import deletePost from "./delete";
 
 
 
@@ -15,7 +17,10 @@ export const PostElement = ({title, content, created_at,key}: {title:string, con
             <div id="created_at">
                 {created_at}
             </div>
-           <Link href="/draft/draftForm"><button className="editButton" onClick={() => editPost({ id: key })}>Edit</button></Link>
+           <Link href="/posts/editForm/"><button className="editButton" onClick={() => (setFormState({ id: key }))}>Edit</button></Link>
+           <div>
+            {key}
+           </div>
         </div>
     )
 };
