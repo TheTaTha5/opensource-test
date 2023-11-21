@@ -50,7 +50,7 @@ const EditForm = () => {
           <button
             type="submit"
             className="formButtonSet"
-            id="saveButton"
+            id="editSaveButton"
             onClick={() => {router.back();
             }}
           >
@@ -58,7 +58,7 @@ const EditForm = () => {
           </button>
           <button
             className="formButtonSet"
-            id="cancleButton"
+            id="editCancleButton"
             type="button"
             onClick={() => (dispatch(voidAll()), router.back())}
           >

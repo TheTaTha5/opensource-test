@@ -20,6 +20,8 @@ export const DraftElement = ({
   key: string;
 }) => {
   const router = useRouter();
+  const datation = new Date(created_at);
+  const ftedDate = [datation.getDate(),"-",datation.getMonth()+1,"-",datation.getFullYear()," ",datation.getHours(),":",datation.getMinutes()].join("");
   const deleteFunc = async ({id}: {id:string}) => {
     const res  = await deletePost({id:id});
     if(res.ok) {
@@ -31,7 +33,7 @@ export const DraftElement = ({
     <div id="cardElement">
       <div id="title">{title}</div>
       <div id="content">{content}</div>
-      <div id="created_at">{created_at}</div>
+      <div id="created_at">{ftedDate}</div>
       <div className="Buttons">
         <Link href="/posts/editForm/"><button className="editButton" onClick={() => (editPost({ id: key }),store.dispatch(submitDraft()))}>Edit</button></Link>
         <button className="publishButton" id={key} onClick={() => publishDraft({ id: key })}>
@@ -40,9 +42,6 @@ export const DraftElement = ({
         <button className="deleteButton" onClick={() => (deleteFunc({id:key}))}>
           Delete
         </button>
-        <div>
-          {key}
-        </div>
       </div>
     </div>
   );

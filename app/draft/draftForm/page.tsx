@@ -79,7 +79,7 @@ const DraftForm = () => {
           value={postReducer.value.content}
           onChange={(e) => dispatch(setContent(e.target.value))}
         />
-        <div>
+        <div className="saveAndCancle">
           <button
             type="submit"
             className="formButtonSet"
