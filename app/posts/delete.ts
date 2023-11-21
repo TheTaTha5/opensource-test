@@ -8,11 +8,12 @@ import { fetchingError } from "../errorHander/exceptions";
     })
     if(!res.ok) {
         deletePost({id:id});
-       
 
     } else {
         console.log("Post ok = " + res.status);
+        
     }
+    
     return res;
 }
 

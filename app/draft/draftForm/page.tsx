@@ -39,7 +39,7 @@ const DraftForm = () => {
         await patchPost({content:postReducer.value.content, title:postReducer.value.title, id:postReducer.value.id, pub:true}).then((res)=> {
           console.log("patching")
           router.push("/");
-          store.dispatch(voidAll());
+          dispatch(voidAll());
           })
       }) //set ID state
           
@@ -47,12 +47,8 @@ const DraftForm = () => {
 
       case false:
         console.log("false publish case => post reducer publish == " + postReducer.value.published);
-        await postPost({content:postReducer.value.content,title:postReducer.value.title}).then((res)=> {
-          // console.log("resok == " +res.ok);
-          if(res) {
-            dispatch(voidAll());
-          }
-        })
+        await postPost({content:postReducer.value.content,title:postReducer.value.title})
+        dispatch(voidAll());
         router.push("/draft")
         break;
     }

@@ -60,7 +60,7 @@ const EditForm = () => {
             className="formButtonSet"
             id="editCancleButton"
             type="button"
-            onClick={() => (dispatch(voidAll()), router.back())}
+            onClick={() => (router.back())}
           >
             Cancle
           </button>
