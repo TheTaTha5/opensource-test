@@ -4,6 +4,8 @@ import {publishDraft } from "./publish";
 import deletePost from "../posts/delete";
 import { useRouter } from "next/navigation";
 import editPost from "../posts/edit";
+import { submitDraft } from "../redux/feature/postSlices";
+import { store } from "../redux/store";
 
 
 export const DraftElement = ({
@@ -31,7 +33,7 @@ export const DraftElement = ({
       <div id="content">{content}</div>
       <div id="created_at">{created_at}</div>
       <div className="Buttons">
-        <Link href="/posts/editForm/"><button className="editButton" onClick={() => editPost({ id: key })}>Edit</button></Link>
+        <Link href="/posts/editForm/"><button className="editButton" onClick={() => (editPost({ id: key }),store.dispatch(submitDraft()))}>Edit</button></Link>
         <button className="publishButton" id={key} onClick={() => publishDraft({ id: key })}>
           Publish
         </button>

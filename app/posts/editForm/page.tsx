@@ -16,52 +16,20 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import deletePost from "../delete";
+import { patchPost } from "../patch";
 
 const EditForm = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const postReducer = useSelector(postSelector);
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const raw = JSON.stringify({
-      title: postReducer.value.title.toString(),
-      content: postReducer.value.content.toString(),
-      published: postReducer.value.published.toString(),
-    });
-    console.log("raw log = " + raw);
-    
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-    };
-
-    const res = await fetch(
-      "https://post-api.opensource-technology.com/api/posts",
-      requestOptions
-    )
-      .then(function (res) {
-        
-        console.log("fetch post status = " + res.status);
-        if (!res.ok) {
-          router.push("/draft/draftForm");
-          console.log(res.status)
-
-          throw new fetchingError();
-        } else {
-          dispatch(voidAll());
-        }
-        return res.json();
-      })
-      .then((resString: IPost) => {
-        dispatch(setID(resString.id));
-        if (postReducer.value.published === true) {
-        
-        }
-      });
+    console.log("is publish == " + postReducer.value.published);
+    await patchPost({title:postReducer.value.title, content:postReducer.value.content, id:postReducer.value.id, pub:postReducer.value.published}).then((res) => {
+      if(res.ok) {
+        router.back();
+      }
+    })
   };
   return (
     <div className="Form">
@@ -87,8 +55,6 @@ const EditForm = () => {
             className="formButtonSet"
             id="saveButton"
             onClick={() => {
-              dispatch(submitDraft()),
-                router.back();
             }}
           >
             Save
@@ -97,13 +63,13 @@ const EditForm = () => {
             className="formButtonSet"
             id="cancleButton"
             type="button"
-            onClick={() => (dispatch(voidAll()), router.replace("/"))}
+            onClick={() => (dispatch(voidAll()), router.back())}
           >
             Cancle
           </button>
         <button
           className="formButtonSet"
-          id="publishButton"
+          id="deleteButton"
           onClick={() => {
             (deletePost({id:postReducer.value.id}),
             router.back())

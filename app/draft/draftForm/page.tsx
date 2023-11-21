@@ -29,7 +29,7 @@ const DraftForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(postReducer.value.published);
+    console.log("post reducer publish == " + postReducer.value.published);
 
     switch (postReducer.value.published) {
       case true:
@@ -37,38 +37,26 @@ const DraftForm = () => {
         if(res.ok) {
           console.log(res.body);
           console.log("start patch");
-          // console.log("patching post id == " + store.getState().postSliceReducer.value.id);
-          await patchPost({content:postReducer.value.content, title:postReducer.value.title, id:store.getState().postSliceReducer.value.id}).then(async (res) => {
-           if(res.ok) {
-            // await deletePost({id:postReducer.value.id});
-           } else {
+          await patchPost({content:postReducer.value.content, title:postReducer.value.title, id:store.getState().postSliceReducer.value.id, pub:true}).then(async (res) => {
+           if(!res.ok) {
             throw new fetchingError();
            }
           })
+          router.push("/");
         } else {
           console.log("post result is == " + res.ok)
         }
       });
         break;
       case false:
-        const postDraft = fetch(
-          "https://post-api.opensource-technology.com/api/posts/",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              title: postReducer.value.title,
-              content: postReducer.value.content,
-            }),
+        console.log("false publish case => post reducer publish == " + postReducer.value.published);
+        await postPost({content:postReducer.value.content,title:postReducer.value.title}).then((res)=> {
+          console.log("resok == " +res.ok);
+          if(res.ok) {
+            dispatch(voidAll());
+            router.push("/draft");
           }
-        ).then(async (res) => {
-          console.log(
-            "SubmitPublishFunctionCalled status === " + res.status + res.body
-          );
-          if (!res.ok) {
-            throw new fetchingError();
-          }
-        });
+        })
         break;
     }
   };
@@ -97,7 +85,7 @@ const DraftForm = () => {
             className="formButtonSet"
             id="saveButton"
             onClick={() => {
-              dispatch(submitDraft(),), router.push("/draft");
+              dispatch(submitDraft(),);
             }}
           >
             Save

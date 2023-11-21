@@ -90,7 +90,7 @@ textarea {
   border-radius: 8px;
 }
 #saveButton {
-  background-color: rgb(190, 202, 20);
+  background-color: rgb(108, 202, 20);
   color: rgb(255, 255, 255);
   padding: 7px 14px;
   
@@ -117,13 +117,14 @@ textarea {
   padding: 7px 14px;
   border-radius: 8px;
 }
-.deleteButton {
+#deleteButton,.deleteButton {
   justify-content: right;
   background-color: rgb(245, 74, 6);
   color: rgb(255, 255, 255);
   padding: 7px 14px;
   border-radius: 8px;
 }
+
 
 .Form {
   padding-left: 2rem;
