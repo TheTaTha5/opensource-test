@@ -26,9 +26,6 @@ const EditForm = () => {
     e.preventDefault();
     console.log("is publish == " + postReducer.value.published);
     await patchPost({title:postReducer.value.title, content:postReducer.value.content, id:postReducer.value.id, pub:postReducer.value.published}).then((res) => {
-      if(res.ok) {
-        router.back();
-      }
     })
   };
   return (
@@ -54,7 +51,7 @@ const EditForm = () => {
             type="submit"
             className="formButtonSet"
             id="saveButton"
-            onClick={() => {
+            onClick={() => {router.back();
             }}
           >
             Save
@@ -68,6 +65,7 @@ const EditForm = () => {
             Cancle
           </button>
         <button
+        type="button"
           className="formButtonSet"
           id="deleteButton"
           onClick={() => {
