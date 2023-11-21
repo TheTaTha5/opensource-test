@@ -30,7 +30,7 @@ export const DraftElement = ({
       <div id="created_at">{ftedDate}</div>
       <div className="Buttons">
         <Link href="/posts/editForm/"><button className="editButton" onClick={() => (editPost({ id: key }),store.dispatch(submitDraft()))}>Edit</button></Link>
-        <button className="publishButton" id={key} onClick={() => publishDraft({ id: key })}>
+        <button className="publishButton" id={key} onClick={() => (publishDraft({ id: key }),router.push('/'))}>
           Publish
         </button>
         <button type="button" className="deleteButton" onClick={() => (deletePost({id:key}))}>
