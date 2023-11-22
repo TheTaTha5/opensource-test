@@ -76,6 +76,7 @@ textarea {
   border-radius: 8px;
   
 }
+
 .editButton {
   justify-content: right;
   background-color: rgb(255, 255, 255);
@@ -96,6 +97,17 @@ textarea {
   padding: 7px 14px;
   width: 50%;
   
+}
+#termInput{
+  width: 20%;
+}
+#formDiv {
+  justify-content: center;
+  display: flex;
+}
+#termButton{
+  color: white;
+  background-color: rgb(160, 160, 156);
 }
 #cancleButton {
   width: 50%;
@@ -184,6 +196,17 @@ label {
   padding-bottom: 2rem;
   border-color: red;
   background-color: rgb(92, 92, 92);
+  margin-top: 25px;
+  border-radius: 4px;
+}
+#cardElementOrange{
+  overflow:hidden;
+  display: block;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+  border-color: red;
+  background-color: rgb(219 99 0);
   margin-top: 25px;
   border-radius: 4px;
 }

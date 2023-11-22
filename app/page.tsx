@@ -3,6 +3,7 @@ import Link from "next/link";
 import DisplayPosts from "./posts/postFetcher";
 import { store } from "./redux/store";
 import { voidAll } from "./redux/feature/postSlices";
+import { GetByTermForm } from "./getByTerm/GetByTerm";
 export default function Home() {
   return (
     <main>
@@ -11,6 +12,7 @@ export default function Home() {
       <h1>
         Published posts
         </h1>
+        <GetByTermForm/>
         <div className="OutDisplay">
         <DisplayPosts/>
         </div>

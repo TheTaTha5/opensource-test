@@ -25,7 +25,7 @@ const PostFetcher = () => {
     return (
         <div>
             {postsData?.posts.map((post)=> {
-        return PostElement({title:post.title, content:post.content, created_at:post.created_at, key:post.id})
+        return PostElement({title:post.title, content:post.content, created_at:post.created_at, key:post.id,orange:false})
     })}
         </div>
     )

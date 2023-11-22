@@ -8,12 +8,16 @@ import { stringify } from "querystring";
 
 
 
-export const PostElement = ({title, content, created_at,key}: {title:string, content:string,created_at:string,key:string}) => {
+export const PostElement = ({title, content, created_at,key,orange}: {title:string, content:string,created_at:string,key:string,orange:boolean}) => {
 const datation = new Date(created_at);
-const ftedDate = [datation.getDate(),"-",datation.getMonth()+1,"-",datation.getFullYear()," ",datation.getHours(),":",datation.getMinutes()].join("");
+function addZeroMinuts(i:any) {
+    if (i < 10) {i = "0" + i}
+    return i;
+  }
+const ftedDate = [datation.getDate(),"-",datation.getMonth()+1,"-",datation.getFullYear()," ",datation.getHours(),":",addZeroMinuts(datation.getMinutes())].join("");
 
     return (
-        <div id="cardElement">
+        <div id={orange?"cardElementOrange":"cardElement"}>
             <div id="title">
                 {title}
             </div>

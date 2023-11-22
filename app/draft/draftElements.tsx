@@ -21,7 +21,12 @@ export const DraftElement = ({
 }) => {
   const router = useRouter();
   const datation = new Date(created_at);
-  const ftedDate = [datation.getDate(),"-",datation.getMonth()+1,"-",datation.getFullYear()," ",datation.getHours(),":",datation.getMinutes()].join("");
+  function addZeroMinuts(i:any) {
+    if (i < 10) {i = "0" + i}
+    return i;
+  }
+const ftedDate = [datation.getDate(),"-",datation.getMonth()+1,"-",datation.getFullYear()," ",datation.getHours(),":",addZeroMinuts(datation.getMinutes())].join("");
+
 
   return (
     <div id="cardElement">
